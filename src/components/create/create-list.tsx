@@ -1,20 +1,22 @@
-import { useContext } from "react"
-import newContext from "../../context/newContext"
-import { Iquestion } from "../../types"
-import CreateQuestion from "./create-quiestion"
+import React, { useContext } from 'react';
 
+import newContext from '../../context/newContext';
+import { Iquestion } from '../../types';
+import CreateQuestion from './create-quiestion';
 
-const CreateList = () => {
+function CreateList() {
+  const { questions } = useContext(newContext);
 
-    const { questions } = useContext(newContext)
-    
-    return (
-        <div>
-            {questions.map((question : Iquestion, index: number) => <CreateQuestion key={question.id} index={index} />)}
-        </div>
-    )
-
-    
+  return (
+    <div>
+      {questions.map((question: Iquestion, index: number) => (
+        <CreateQuestion
+          key={question.id}
+          index={index}
+        />
+      ))}
+    </div>
+  );
 }
 
-export default CreateList
+export default CreateList;

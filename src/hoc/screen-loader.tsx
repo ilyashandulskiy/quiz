@@ -1,5 +1,5 @@
-import Spinner from '../components/UI/spinner'
-
+import React from 'react';
+import Spinner from '../components/UI/spinner';
 
 interface Iprops {
     reqired: unknown,
@@ -7,17 +7,11 @@ interface Iprops {
     content: JSX.Element | null
 }
 
-const ScreenLoader = ({reqired, isError, content}: Iprops) => {
+function ScreenLoader({ reqired, isError = false, content }: Iprops) {
+  if (isError) return <h2>ERROR</h2>;
+  if (reqired) return <div className="page">{content}</div>;
 
-    if (isError) {
-        return (<h2>ERROR</h2>)
-    } else {
-        if (reqired) {
-            return (<div className='page'>{content}</div>)
-        } else {
-            return (<Spinner />)
-        }
-    }
+  return <Spinner />;
 }
 
-export default ScreenLoader
+export default ScreenLoader;

@@ -1,14 +1,13 @@
+import React from 'react';
 
 interface Iprops {
     title: string
 }
 
-const ScreenTitle = ({title} : Iprops) => {
-
-    return (
-        <h1 className="screen-title display-6">{title}</h1>
-    )
-
+function ScreenTitle({ title } : Iprops) {
+  return (
+    <h1 className="screen-title display-6">{title}</h1>
+  );
 }
 
-export default ScreenTitle
+export default ScreenTitle;

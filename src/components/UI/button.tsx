@@ -1,3 +1,4 @@
+import React from 'react';
 
 interface Iprops {
     title: string,
@@ -7,18 +8,23 @@ interface Iprops {
     large?: boolean
 }
 
-const Button = ({ title, callback, type = 'primary', outline = false, large = false }: Iprops) => {
-    
-    let buttonClass = 'btn btn-';
+function Button({
+  title, callback, type = 'primary', outline = false, large = false,
+}: Iprops) {
+  let buttonClass = 'btn btn-';
+  if (outline) buttonClass += 'outline-';
+  buttonClass += type;
+  if (large) buttonClass += ' btn-lg';
 
-    if (outline) buttonClass += 'outline-';
-
-    buttonClass += type;
-
-    if (large) buttonClass += ' btn-lg';
-
-    return <button className={buttonClass} type="button" onClick={callback}>{ title }</button>
-
+  return (
+    <button
+      className={buttonClass}
+      type="button"
+      onClick={callback}
+    >
+      {title}
+    </button>
+  );
 }
 
-export default Button
+export default Button;

@@ -1,3 +1,4 @@
+import React from 'react';
 
 interface Iprops {
     placeholder?: string,
@@ -5,8 +6,20 @@ interface Iprops {
     defaultValue?: string,
 }
 
-const Input = ({placeholder, callback, defaultValue} : Iprops) => {
-    return <input type="text" className="form-control" placeholder={placeholder} defaultValue={defaultValue} onChange={(value : React.ChangeEvent<HTMLInputElement>) => callback(value.currentTarget.value)} />
+function Input({ placeholder, callback, defaultValue }: Iprops) {
+  const onInputChange = (value: React.ChangeEvent<HTMLInputElement>) => {
+    callback(value.currentTarget.value);
+  };
+
+  return (
+    <input
+      type="text"
+      className="form-control"
+      placeholder={placeholder}
+      defaultValue={defaultValue}
+      onChange={onInputChange}
+    />
+  );
 }
 
-export default Input
+export default Input;

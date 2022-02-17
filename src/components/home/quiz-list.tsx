@@ -1,7 +1,8 @@
-import * as instance from '../../libs/instance'
-import { useEffect, useState } from 'react'
-import QuizItem from './quiz-item'
-import ScreenLoader from '../../hoc/screen-loader'
+import React, { useEffect, useState } from 'react';
+import instance from '../../libs/instance';
+
+import QuizItem from './quiz-item';
+import ScreenLoader from '../../hoc/screen-loader';
 
 type Ilist = Iitem[]
 
@@ -15,21 +16,32 @@ interface Idata {
     data: Ilist
 }
 
-const QuizList = () => {
+function QuizList() {
+  const [list, setList] = useState<Ilist>([]);
 
-    const [list, setList] = useState<Ilist>([])
+  useEffect(() => {
+    instance.get('getQuizList')
+      .then((data: Idata) => setList(data.data));
+  }, []);
 
-    useEffect(() => {
-        instance.get('getQuizList')
-            .then((data: Idata) => setList(data.data))
-    }, [])
+  const content = list ? (
+    <div className="home__cards">
 
-    const content = list ? <div className="home__cards">{list.map((item: Iitem) => <QuizItem id={item.id} key={item.id} title={item.title} length={item.length} />)}</div> : null
-    
-    return (
-        <ScreenLoader content={content} reqired={list.length} />
-    )
+      {list.map((item: Iitem) => (
+        <QuizItem
+          id={item.id}
+          key={item.id}
+          title={item.title}
+          length={item.length}
+        />
+      ))}
 
+    </div>
+  ) : null;
+
+  return (
+    <ScreenLoader content={content} reqired={list.length} />
+  );
 }
 
-export default QuizList
+export default QuizList;

@@ -1,23 +1,30 @@
-import { useContext } from "react"
-import { Ioption } from "../../types"
-import quizContext from "../../context/quizContext"
-import Option from "./option"
+import React, { useContext } from 'react';
+
+import { Ioption } from '../../types';
+import quizContext from '../../context/quizContext';
+import Option from './option';
 
 const Options = () => {
+  const { step, quiz } = useContext(quizContext);
 
-    const { step, quiz } = useContext(quizContext)
-    
-    const question = quiz?.questions[step];
+  const question = quiz?.questions[step];
 
-    const content = quiz && question ?
-        <div className="options">
-            {question.options.map((option: Ioption) => 
-                <Option key={option.id} label={option.label} correct={option.correct} />
-            )}
-        </div> : null
+  const content = quiz && question
+    ? (
+      <div className="options">
 
-    return content
+        {question.options.map((option: Ioption) => (
+          <Option
+            key={option.id}
+            label={option.label}
+            correct={option.correct}
+          />
+        ))}
 
-}
+      </div>
+    ) : null;
 
-export default Options
+  return content;
+};
+
+export default Options;

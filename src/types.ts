@@ -1,6 +1,5 @@
-
 export interface Iquiz {
-    title: string, 
+    title: string,
     questions: Iquestion[]
 }
 
@@ -11,7 +10,7 @@ export interface Iquestion {
 }
 
 export interface Ioption {
-    label: string, 
+    label: string,
     correct: boolean,
     id: string
 }
